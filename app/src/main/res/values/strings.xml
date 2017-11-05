@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">HUAY</string>
+
+    <!-- TH -->
+    <string name="th_huay">หวย</string>
+
+    <string name="th_day_today">วันนี้</string>
+    <string name="th_day_sunday">วันอาทิตย์</string>
+    <string name="th_day_monday">วันจันทร์</string>
+    <string name="th_day_tuesday">วันอังคาร</string>
+    <string name="th_day_wednesday">วันพุธ</string>
+    <string name="th_day_thursday">วันพฤหัสบดี</string>
+    <string name="th_day_friday">วันศุกร์</string>
+    <string name="th_day_saturday">วันเสาร์</string>
+    <string name="th_day_at">ที่</string>
+    <string name="th_day_month">เดือน</string>
+    <string name="th_day_year">ปี</string>
+    <string name="th_day_huay_tx_1">จดหวยรอบวันที่</string>
+
+    <string name="th_day_january">มกราคม</string>
+    <string name="th_day_february">กุมภาพันธ์</string>
+    <string name="th_day_march">มีนาคม</string>
+    <string name="th_day_april">เมษายน</string>
+    <string name="th_day_may">พฤษภาคม</string>
+    <string name="th_day_june">มิถุนายน</string>
+    <string name="th_day_july">กรกฎาคม</string>
+    <string name="th_day_august">สิงหาคม</string>
+    <string name="th_day_september">กันยายน</string>
+    <string name="th_day_october">ตุลาคม</string>
+    <string name="th_day_november">พฤศจิกายน</string>
+    <string name="th_day_december">ธันวาคม</string>
+
+
 </resources>
