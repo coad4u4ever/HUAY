@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "552375510330",
+    "firebase_url": "https://huay-lotto.firebaseio.com",
+    "project_id": "huay-lotto",
+    "storage_bucket": "huay-lotto.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552375510330:android:2723f9dec2d63087",
+        "android_client_info": {
+          "package_name": "com.app.chacoad.huay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "552375510330-p9tlom68qo7bub4aj8a8lbg1rjt6nen0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.chacoad.huay",
+            "certificate_hash": "87556bb99eeba5e259f84096ada4c882eff20b05"
+          }
+        },
+        {
+          "client_id": "552375510330-h8urhf5safl2l3f7pgga1ibeguj9ketv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS4HtWjTiXYDeiAoZ843cDChHnvmCI9kg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "552375510330-h8urhf5safl2l3f7pgga1ibeguj9ketv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

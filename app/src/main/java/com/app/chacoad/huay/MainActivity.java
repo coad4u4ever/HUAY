@@ -12,6 +12,7 @@ import com.app.chacoad.huay.Util.DayDate;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     TextView mainActivityDate = null;
     Button mainActivityButton1 = null;
+    DayDate dayDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         mainActivityDate = findViewById(R.id.main_activity_date);
         mainActivityButton1 = findViewById(R.id.main_activity_button1);
-        DayDate dayDate = new DayDate(this);
+        dayDate = new DayDate(this);
         String dateFormat = getString(R.string.th_day_today) + " " + dayDate.getDateFullFormat();
         String nextHuayDate = getString(R.string.th_day_huay_tx_1) + " " + dayDate.getNextHuayDate();
         mainActivityDate.setText(dateFormat);
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.main_activity_button1:
                 Intent intent = new Intent(this, NumberActivity.class);
+                intent.putExtra("key_huay_date", dayDate.getNextHuayDateKey());
                 startActivity(intent);
                 break;
         }

@@ -1,12 +1,11 @@
 package com.app.chacoad.huay.Util;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.app.chacoad.huay.R;
 
 import java.util.Calendar;
-
-import android.text.TextUtils;
 
 /**
  * Created by Chacoad on 5/11/2560.
@@ -118,6 +117,11 @@ public class DayDate {
         return Integer.toString(mYear + 543);
     }
 
+    public int getMonth() {
+        return mMonth + 1;
+    }
+
+
     public String getDateFullFormat() {
         String date = getDayOfWeek() + context.getString(R.string.th_day_at);
         String day = getDay();
@@ -148,6 +152,32 @@ public class DayDate {
             }
         }
         nextHuayDate = formatDate(nextHuayDay, monthText, year);
+        return nextHuayDate;
+    }
+
+    public String getNextHuayDateKey() {
+        String nextHuayDate = "t";
+
+        if (mDate >= 2 && mDate <= 16) {
+            nextHuayDate += mYear;
+            nextHuayDate += getMonth();
+            nextHuayDate += "16";
+        } else if (mDate == 1) {
+            nextHuayDate += mYear;
+            nextHuayDate += getMonth();
+            nextHuayDate = "01";
+        } else if (mDate > 16) {
+            if (mMonth < 12) {
+                nextHuayDate += mYear;
+                nextHuayDate += (getMonth() + 1);
+
+            } else {
+                nextHuayDate += (mYear + 1);
+                nextHuayDate += "01";
+            }
+            nextHuayDate += "01";
+        }
+
         return nextHuayDate;
     }
 
