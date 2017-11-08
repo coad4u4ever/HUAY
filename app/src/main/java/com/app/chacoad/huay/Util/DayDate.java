@@ -6,6 +6,8 @@ import com.app.chacoad.huay.R;
 
 import java.util.Calendar;
 
+import android.text.TextUtils;
+
 /**
  * Created by Chacoad on 5/11/2560.
  */
@@ -117,54 +119,39 @@ public class DayDate {
     }
 
     public String getDateFullFormat() {
-        return getDayOfWeek() +
-                context.getString(R.string.th_day_at) +
-                " " +
-                getDay() +
-                " " +
-                getMonth(mMonth) +
-                " " +
-                context.getString(R.string.th_day_year) +
-                " " +
-                getYear()
-                ;
+        String date = getDayOfWeek() + context.getString(R.string.th_day_at);
+        String day = getDay();
+        String month = getMonth(mMonth);
+        String yearText = context.getString(R.string.th_day_year);
+        String year = getYear();
+
+        return formatDate(date, day, month, yearText, year);
+
     }
 
     public String getNextHuayDate() {
-        String nextHuayDate = null;
+        String nextHuayDate;
+        String nextHuayDay = null;
+        String monthText = context.getString(R.string.th_day_month) + getMonth(mMonth);
+        String year = getYear();
         if (mDate >= 2 && mDate <= 16) {
-            nextHuayDate = "16" +
-                    " " +
-                    context.getString(R.string.th_day_month) +
-                    getMonth(mMonth) +
-                    " " +
-                    getYear();
+            nextHuayDay = "16";
         } else if (mDate == 1) {
-            nextHuayDate = "1" +
-                    " " +
-                    context.getString(R.string.th_day_month) +
-                    getMonth(mMonth) +
-                    " " +
-                    getYear();
+            nextHuayDay = "1";
         } else if (mDate > 16) {
-            nextHuayDate = Integer.toString(1) +
-                    " " +
-                    context.getString(R.string.th_day_month);
-
-            if (mMonth >= 1 && mMonth <= 11) {
-                nextHuayDate += nextHuayDate +
-                        getMonth(mMonth + 1) +
-                        " " +
-                        getYear();
-            } else if (mMonth == 12) {
-                nextHuayDate += nextHuayDate +
-                        getMonth(1) +
-                        " " +
-                        getYear() + 1;
+            nextHuayDay = "1";
+            if (mMonth < 12) {
+                monthText = context.getString(R.string.th_day_month) + getMonth(mMonth + 1);
+            } else {
+                monthText = context.getString(R.string.th_day_month) + getMonth(1);
+                year = year + 1;
             }
-
         }
-
+        nextHuayDate = formatDate(nextHuayDay, monthText, year);
         return nextHuayDate;
+    }
+
+    private String formatDate(String... strings) {
+        return TextUtils.join(" ", strings);
     }
 }
