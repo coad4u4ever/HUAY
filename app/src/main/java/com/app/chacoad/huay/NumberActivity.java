@@ -14,6 +14,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class NumberActivity extends AppCompatActivity implements View.OnClickListener {
     int numberCount = 1;
     int priceCount = 1;
+    String keyCustomerName;
+    String keyCustomerId;
     String keyHuayDate;
     private Button numberActivityAdd;
     private EditText numberActivityNumber;
@@ -32,13 +34,19 @@ public class NumberActivity extends AppCompatActivity implements View.OnClickLis
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
                 keyHuayDate = null;
+                keyCustomerName = null;
+                keyCustomerId = null;
             } else {
                 keyHuayDate = extras.getString("key_huay_date");
+                keyCustomerName = extras.getString("key_customer_name");
+                keyCustomerId = extras.getString("key_customer_id");
             }
         } else {
             keyHuayDate = (String) savedInstanceState.getSerializable("key_huay_date");
+            keyCustomerName = (String) savedInstanceState.getSerializable("key_customer_name");
+            keyCustomerId = (String) savedInstanceState.getSerializable("key_customer_id");
         }
-
+        setTitle(keyCustomerName);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         numberActivityAdd.setOnClickListener(this);
     }
@@ -63,7 +71,7 @@ public class NumberActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void insertDatabase(int text, int price) {
-        mDatabase.child(keyHuayDate).child("customer1").child("number_" + numberCount++).setValue(text);
-        mDatabase.child(keyHuayDate).child("customer1").child("price_" + priceCount++).setValue(price);
+        mDatabase.child(keyHuayDate).child("c" + keyCustomerId).child("number_" + numberCount++).setValue(text);
+        mDatabase.child(keyHuayDate).child("c" + keyCustomerId).child("price_" + priceCount++).setValue(price);
     }
 }

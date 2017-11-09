@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.main_activity_button1:
-                Intent intent = new Intent(this, NumberActivity.class);
+                Intent intent = new Intent(this, CustomerActivity.class);
                 intent.putExtra("key_huay_date", dayDate.getNextHuayDateKey());
                 startActivity(intent);
                 break;

@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".NumberActivity" />
+        <activity android:name=".CustomerActivity" />
     </application>
 
 </manifest>
