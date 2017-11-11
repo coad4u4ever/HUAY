@@ -1,23 +1,29 @@
 package com.app.chacoad.huay.Model;
 
-/**
- * Created by Admin on 9/11/2560.
- */
+import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.HashMap;
+import java.util.Map;
+
+@IgnoreExtraProperties
 public class Customer {
-    private String customerId;
+    private Long customerId;
     private String customerName;
+    private HashMap<String, LotoNumber> numbers;
 
-    public Customer(String customerId, String customerName) {
+    public Customer() {
+    }
+
+    public Customer(Long customerId, String customerName) {
         this.customerId = customerId;
         this.customerName = customerName;
     }
 
-    public String getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 
@@ -29,8 +35,11 @@ public class Customer {
         this.customerName = customerName;
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
+    public Map<String, LotoNumber> getNumbers() {
+        return numbers;
+    }
+
+    public void setNumbers(HashMap<String, LotoNumber> numbers) {
+        this.numbers = numbers;
     }
 }

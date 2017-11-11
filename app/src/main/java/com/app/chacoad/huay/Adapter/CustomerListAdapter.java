@@ -23,15 +23,23 @@ public class CustomerListAdapter extends ArrayAdapter<Customer> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
-        Customer cus = getItem(position);
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_customer, viewGroup, false);
-        }
-        ViewHolder viewHolder = new ViewHolder(convertView);
-        viewHolder.customerId.setText(cus.getCustomerId());
-        viewHolder.customerName.setText(cus.getCustomerName());
+        View row = null;
 
-        return convertView;
+        if (convertView == null) {
+            row = LayoutInflater.from(getContext()).inflate(R.layout.list_customer, viewGroup, false);
+        } else {
+            row = convertView;
+        }
+
+        Customer cus = getItem(position);
+        ViewHolder viewHolder = new ViewHolder(row);
+        viewHolder.customerId.setText(Long.toString(cus.getCustomerId()));
+        viewHolder.customerName.setText(cus.getCustomerName());
+//        if (convertView == null) {
+//            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_customer, viewGroup, false);
+//        }
+
+        return row;
     }
 
     public static class ViewHolder {

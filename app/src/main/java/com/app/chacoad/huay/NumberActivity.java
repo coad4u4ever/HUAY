@@ -7,8 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.app.chacoad.huay.Model.Customer;
+import com.app.chacoad.huay.Model.LotoNumber;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 
 public class NumberActivity extends AppCompatActivity implements View.OnClickListener {
@@ -59,7 +63,7 @@ public class NumberActivity extends AppCompatActivity implements View.OnClickLis
                 String price = numberActivityPrice.getText().toString();
                 if (number.length() == 2 || number.length() == 3) {
                     if (price.length() >= 1 && price.length() <= 4) {
-                        insertDatabase(Integer.parseInt(number), Integer.parseInt(price));
+                        insertDatabase(Long.parseLong(number), Long.parseLong(price));
                     } else {
                         Toast.makeText(this, "ใส่จำนวนเงิน 1 ถึง 4 ตัว", Toast.LENGTH_SHORT).show();
                     }
@@ -70,8 +74,17 @@ public class NumberActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private void insertDatabase(int text, int price) {
-        mDatabase.child(keyHuayDate).child("c" + keyCustomerId).child("number_" + numberCount++).setValue(text);
-        mDatabase.child(keyHuayDate).child("c" + keyCustomerId).child("price_" + priceCount++).setValue(price);
+    private void insertDatabase(long number, long price) {
+        Customer cus = new Customer();
+        cus.setCustomerName(keyCustomerName);
+        cus.setCustomerId(Long.parseLong(keyCustomerId));
+        LotoNumber num = new LotoNumber(number, price);
+        HashMap<String, LotoNumber> data = new HashMap<String, LotoNumber>();
+        data.put("n1", num);
+        cus.setNumbers(data);
+
+        mDatabase.child(keyHuayDate).child("c" + keyCustomerId).setValue(cus);
+//        mDatabase.child(keyHuayDate).child(keyCustomerId).child("number_" + numberCount++).setValue(text);
+//        mDatabase.child(keyHuayDate).child(keyCustomerId).child("price_" + priceCount++).setValue(price);
     }
 }
