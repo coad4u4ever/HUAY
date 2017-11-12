@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.app.chacoad.huay.Util.DayDate;
+import com.app.chacoad.huay.Util.Lotto;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     TextView mainActivityDate = null;
@@ -25,7 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String nextHuayDate = getString(R.string.th_day_huay_tx_1) + " " + dayDate.getNextHuayDate();
         mainActivityDate.setText(dateFormat);
         mainActivityButton1.setText(nextHuayDate);
-
+        Lotto lotto = new Lotto();
+        lotto.start();
 
         mainActivityButton1.setOnClickListener(this);
     }
