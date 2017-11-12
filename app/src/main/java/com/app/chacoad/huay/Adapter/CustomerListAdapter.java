@@ -35,9 +35,6 @@ public class CustomerListAdapter extends ArrayAdapter<Customer> {
         ViewHolder viewHolder = new ViewHolder(row);
         viewHolder.customerId.setText(Long.toString(cus.getCustomerId()));
         viewHolder.customerName.setText(cus.getCustomerName());
-//        if (convertView == null) {
-//            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_customer, viewGroup, false);
-//        }
 
         return row;
     }
