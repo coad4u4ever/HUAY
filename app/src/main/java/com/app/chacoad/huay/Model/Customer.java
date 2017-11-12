@@ -3,7 +3,6 @@ package com.app.chacoad.huay.Model;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @IgnoreExtraProperties
 public class Customer {
@@ -35,7 +34,7 @@ public class Customer {
         this.customerName = customerName;
     }
 
-    public Map<String, LotoNumber> getNumbers() {
+    public HashMap<String, LotoNumber> getNumbers() {
         return numbers;
     }
 

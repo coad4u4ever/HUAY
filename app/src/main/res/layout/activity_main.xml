@@ -9,13 +9,14 @@
     <TextView
         android:id="@+id/main_activity_date"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
+        android:gravity="center"
         android:text="Hello World!"
-        android:textSize="30sp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -28,8 +29,9 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/main_activity_date"
         android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="99dp"
+        android:layout_marginTop="20dp"
         android:text="จดหวยรอบวันที่ 1 เดือนมกราคม 2560"
         android:textSize="40sp" />
 

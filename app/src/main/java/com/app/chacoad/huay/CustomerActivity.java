@@ -30,7 +30,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
     ArrayList<Customer> customerArrayList;
     CustomerListAdapter adapter;
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference myRef;
+    private DatabaseReference mDatabase;
     private long currentCustomerId = 1;
 
     @Override
@@ -58,7 +58,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
 
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
+        mDatabase = mFirebaseDatabase.getReference();
 
         adapter = new CustomerListAdapter(this, customerArrayList);
         listViewCustomer.setAdapter(adapter);
@@ -78,7 +78,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
@@ -101,9 +101,9 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
         Log.d(TAG, "keyHuayDate: " + keyHuayDate);
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
             for (DataSnapshot ds2 : ds.getChildren()) {
-                Log.d(TAG, "keyHuayDate " + ds.getKey());
+//                Log.d(TAG, "keyHuayDate " + ds.getKey());
                 Customer cus = ds2.getValue(Customer.class);
-                Log.d(TAG, "keyHuayDate " + cus.getCustomerName());
+//                Log.d(TAG, "keyHuayDate " + cus.getCustomerName());
                 customerArrayList.add(cus);
                 customerCount++;
             }
@@ -141,7 +141,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
                     Customer cus = new Customer();
                     cus.setCustomerName(newCustomerName.getText().toString());
                     cus.setCustomerId(currentCustomerId);
-                    myRef.child(keyHuayDate).child("c" + currentCustomerId).setValue(cus);
+                    mDatabase.child(keyHuayDate).child("c" + currentCustomerId).setValue(cus);
                     customerArrayList.clear();
                     adapter.notifyDataSetChanged();
                     newCustomerName.setText("");
