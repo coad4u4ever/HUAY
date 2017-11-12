@@ -38,6 +38,7 @@ public class Lotto implements Callback<RSSFeed> {
             this.setFirstPrize(rss.getFirstArticle().getDescription());
             Log.d("GUID", rss.getFirstArticle().getGuid());
             Log.d("pubDate", rss.getFirstArticle().getPubdate());
+            Log.d("FormattedDate", rss.getFirstArticle().getFormattedPubdate());
             Log.d("Description", rss.getFirstArticle().getDescription());
             Log.d("FirstPrize", Integer.toString(this.getFirstPrize()));
         } else {
