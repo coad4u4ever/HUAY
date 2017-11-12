@@ -59,17 +59,6 @@
         app:layout_constraintVertical_bias="1.0" />
 
 
-    <ListView
-        android:id="@+id/number_activity_listview"
-        android:layout_width="784dp"
-        android:layout_height="869dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/number_activity_add"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="768dp"
@@ -100,4 +89,15 @@
             android:text="ราคา"
             android:textSize="30sp" />
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/number_activity_listview"
+        android:layout_width="784dp"
+        android:layout_height="872dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.148" />
 </android.support.constraint.ConstraintLayout>
