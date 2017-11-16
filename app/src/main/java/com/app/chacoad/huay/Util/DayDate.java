@@ -22,6 +22,17 @@ public class DayDate {
     int mSec;
     private Context context;
 
+    public DayDate() {
+        mCalendar = Calendar.getInstance();
+        mDay = mCalendar.get(Calendar.DAY_OF_WEEK);
+        mDate = mCalendar.get(Calendar.DAY_OF_MONTH);
+        mMonth = mCalendar.get(Calendar.MONTH);
+        mYear = mCalendar.get(Calendar.YEAR);
+        mHour = mCalendar.get(Calendar.HOUR);
+        mMin = mCalendar.get(Calendar.MINUTE);
+        mSec = mCalendar.get(Calendar.SECOND);
+    }
+
     public DayDate(Context context) {
         this.context = context;
         mCalendar = Calendar.getInstance();
@@ -32,6 +43,10 @@ public class DayDate {
         mHour = mCalendar.get(Calendar.HOUR);
         mMin = mCalendar.get(Calendar.MINUTE);
         mSec = mCalendar.get(Calendar.SECOND);
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     public String getDayOfWeek() {
@@ -183,5 +198,12 @@ public class DayDate {
 
     private String formatDate(String... strings) {
         return TextUtils.join(" ", strings);
+    }
+
+    public String getCurrentCycle() {
+        String currentCycleDay = (mDay < 16) ? "01" : "16";
+        String currnetCycleMonth = (mMonth + 1 < 10) ? "0".concat(String.valueOf(mMonth + 1)) : String.valueOf(mMonth + 1);
+        String currentCycle = String.valueOf(mYear).concat(currnetCycleMonth).concat(currentCycleDay);
+        return currentCycle;
     }
 }
