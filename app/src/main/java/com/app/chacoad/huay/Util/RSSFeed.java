@@ -21,7 +21,7 @@ public class RSSFeed {
     }
 
     public Article getFirstArticle() {
-        return articleList.get(1);
+        return articleList.get(0);
     }
 
     public void setArticleList(List<Article> articleList) {
