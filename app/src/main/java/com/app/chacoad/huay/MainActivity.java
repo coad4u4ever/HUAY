@@ -9,11 +9,14 @@ import android.widget.TextView;
 
 import com.app.chacoad.huay.Util.DayDate;
 import com.app.chacoad.huay.Util.Lotto;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     TextView mainActivityDate = null;
     Button mainActivityButton1 = null;
     DayDate dayDate;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         mainActivityDate = findViewById(R.id.main_activity_date);
         mainActivityButton1 = findViewById(R.id.main_activity_button1);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         dayDate = new DayDate(this);
         String dateFormat = getString(R.string.th_day_today) + " " + dayDate.getDateFullFormat();
         String nextHuayDate = getString(R.string.th_day_huay_tx_1) + " " + dayDate.getNextHuayDate();

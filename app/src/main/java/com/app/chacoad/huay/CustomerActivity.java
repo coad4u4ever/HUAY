@@ -30,7 +30,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
     ArrayList<Customer> customerArrayList;
     CustomerListAdapter adapter;
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mDatabase;
+    private DatabaseReference ref;
     private long currentCustomerId = 1;
 
     @Override
@@ -42,9 +42,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
         addNewCustomer = findViewById(R.id.add_new_customer);
         addNewCustomer.setEnabled(false);
         addNewCustomer.setOnClickListener(this);
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
         customerArrayList = new ArrayList<>();
-
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
@@ -56,9 +54,8 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
             keyHuayDate = (String) savedInstanceState.getSerializable("key_huay_date");
         }
 
-
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabase = mFirebaseDatabase.getReference();
+        ref = mFirebaseDatabase.getReference(keyHuayDate);
 
         adapter = new CustomerListAdapter(this, customerArrayList);
         listViewCustomer.setAdapter(adapter);
@@ -78,12 +75,22 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                showData(dataSnapshot);
+
+                customerArrayList.clear();
+                addNewCustomer.setEnabled(true);
+                int customerCount = 0;
+                Log.d(TAG, "keyHuayDate: " + keyHuayDate);
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Log.d(TAG, "onDataChange array added");
+                    Customer cus = ds.getValue(Customer.class);
+                    customerArrayList.add(cus);
+                    customerCount++;
+                }
+                adapter.notifyDataSetChanged();
+                currentCustomerId = customerCount;
                 adapter.notifyDataSetChanged();
             }
 
@@ -94,24 +101,6 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    private void showData(DataSnapshot dataSnapshot) {
-        customerArrayList.clear();
-        addNewCustomer.setEnabled(true);
-        int customerCount = 0;
-        Log.d(TAG, "keyHuayDate: " + keyHuayDate);
-        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-            for (DataSnapshot ds2 : ds.getChildren()) {
-//                Log.d(TAG, "keyHuayDate " + ds.getKey());
-                Customer cus = ds2.getValue(Customer.class);
-//                Log.d(TAG, "keyHuayDate " + cus.getCustomerName());
-                customerArrayList.add(cus);
-                customerCount++;
-            }
-        }
-
-        adapter.notifyDataSetChanged();
-        currentCustomerId = customerCount;
-    }
 
     @Override
     public void onStart() {
@@ -141,7 +130,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
                     Customer cus = new Customer();
                     cus.setCustomerName(newCustomerName.getText().toString());
                     cus.setCustomerId(currentCustomerId);
-                    mDatabase.child(keyHuayDate).child("c" + currentCustomerId).setValue(cus);
+                    ref.child("c" + currentCustomerId).setValue(cus);
                     customerArrayList.clear();
                     adapter.notifyDataSetChanged();
                     newCustomerName.setText("");

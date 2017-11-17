@@ -16,7 +16,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="Hello World!"
-        android:textSize="40sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -33,6 +33,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="จดหวยรอบวันที่ 1 เดือนมกราคม 2560"
-        android:textSize="40sp" />
+        android:textSize="20sp" />
 
 </RelativeLayout>
