@@ -26,7 +26,6 @@ public class CustomerListAdapter extends ArrayAdapter<Customer> {
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
         View row;
-        Log.d(TAG, "getView: " + position);
         if (convertView == null) {
             row = LayoutInflater.from(getContext()).inflate(R.layout.list_customer, viewGroup, false);
         } else {
