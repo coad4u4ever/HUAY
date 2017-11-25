@@ -4,6 +4,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class LotoNumber {
+    private String keyname;
     private Long number;
     private Long price;
 
@@ -29,5 +30,13 @@ public class LotoNumber {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public String getKeyname() {
+        return keyname;
+    }
+
+    public void setKeyname(String keyname) {
+        this.keyname = keyname;
     }
 }

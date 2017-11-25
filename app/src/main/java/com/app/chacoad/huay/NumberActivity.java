@@ -1,6 +1,8 @@
 package com.app.chacoad.huay;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -32,12 +34,16 @@ public class NumberActivity extends AppCompatActivity implements View.OnClickLis
     Customer cus;
     ArrayList<LotoNumber> lotoNumberArrayList;
     LotoNumberListAdapter adapter;
+    AlertDialog.Builder builder;
+    String numberKey;
+    int nextNumberKey;
     private Button numberActivityAdd;
     private EditText numberActivityNumber;
     private EditText numberActivityPrice;
     private ListView numberActivityListview;
     private DatabaseReference mDatabase;
     private DatabaseReference ref;
+    private DatabaseReference refDel;
     private long nextNumberId = 1;
     private HashMap<String, LotoNumber> numbers;
 
@@ -84,26 +90,54 @@ public class NumberActivity extends AppCompatActivity implements View.OnClickLis
         mDatabase = FirebaseDatabase.getInstance().getReference();
         ref = mDatabase.child(keyHuayDate).child("c" + keyCustomerId).child("numbers");
         numbers = new HashMap<String, LotoNumber>();
-
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 numberActivityAdd.setEnabled(true);
                 lotoNumberArrayList.clear();
+                numbers.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     LotoNumber ln = new LotoNumber(ds.getValue(LotoNumber.class).getNumber(), ds.getValue(LotoNumber.class).getPrice());
+                    ln.setKeyname(ds.getKey());
                     numbers.put(ds.getKey(), ln);
                     lotoNumberArrayList.add(ln);
+                    int currentNumberKey = Integer.parseInt(ds.getKey().substring(1));
+                    if (currentNumberKey > nextNumberKey) {
+                        nextNumberKey = currentNumberKey;
+                    }
                 }
-                Log.d(TAG, "numbers size: " + numbers.size());
-                nextNumberId = numbers.size() + 1;
-                Log.d(TAG, "nextNumberId : " + nextNumberId);
+                nextNumberId = nextNumberKey + 1;
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+
+
+        numberActivityListview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View arg1, int pos, long id) {
+                LotoNumber item = (LotoNumber) adapterView.getItemAtPosition(pos);
+                numberKey = item.getKeyname();
+                builder = new AlertDialog.Builder(NumberActivity.this);
+                builder.setMessage(R.string.th_confirm_del_num);
+                builder.setPositiveButton(R.string.th_yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        refDel = mDatabase.child(keyHuayDate).child("c" + keyCustomerId).child("numbers").child(numberKey);
+                        refDel.removeValue();
+                    }
+                });
+                builder.setNegativeButton(R.string.th_no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+                return true;
             }
         });
 

@@ -31,4 +31,7 @@
     <string name="th_day_december">ธันวาคม</string>
 
 
+    <string name="th_confirm_del_num">ต้องการจะลบเลขตัวนี้ใช่ไหม</string>
+    <string name="th_yes">ใช่</string>
+    <string name="th_no">ไม่</string>
 </resources>
